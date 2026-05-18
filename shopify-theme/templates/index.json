@@ -1,0 +1,49 @@
+{
+  "sections": {
+    "hero-banner": {
+      "type": "hero-banner",
+      "settings": {
+        "eyebrow": "Work. Recover. Rest.",
+        "headline_prefix": "Your body works hard.",
+        "headline_italic": "Equip it",
+        "headline_suffix": "accordingly.",
+        "subheading": "Ergonomic tools designed for the desk, the mat, and the pillow. Three pillars. One coherent practice.",
+        "btn_primary_label": "Shop the edit",
+        "btn_primary_url": "/collections/all",
+        "btn_ghost_label": "Our approach",
+        "btn_ghost_url": "/pages/our-story"
+      }
+    },
+    "pillar-tiles": {
+      "type": "pillar-tiles",
+      "settings": {
+        "eyebrow": "Three pillars",
+        "heading": "Built for the full day.",
+        "work_desc": "Tools that hold posture so your focus can hold longer.",
+        "recover_desc": "Targeted relief for the muscles that carry the workload.",
+        "rest_desc": "The environment for sleep that the body actually earns."
+      }
+    },
+    "featured-collection": {
+      "type": "featured-collection",
+      "settings": {
+        "eyebrow": "Editor's selection",
+        "heading": "What we carry.",
+        "subheading": "A considered set of tools. Nothing redundant.",
+        "products_count": 6
+      }
+    },
+    "editorial-quote": {
+      "type": "editorial-quote",
+      "settings": {
+        "eyebrow": "The KRAUNO standard",
+        "quote_prefix": "We test everything. We carry",
+        "quote_italic": "only what stays.",
+        "quote_suffix": "",
+        "body": "Every product in this store has passed an internal testing protocol. If we can't use it daily, it doesn't make the edit. That's the whole process.",
+        "attribution": "KRAUNO, Toronto"
+      }
+    }
+  },
+  "order": ["hero-banner", "pillar-tiles", "featured-collection", "editorial-quote"]
+}

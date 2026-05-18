@@ -1,0 +1,302 @@
+<section class="main-product" aria-label="Product detail">
+  <div class="main-product-inner">
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span class="breadcrumb-sep" aria-hidden="true">/</span>
+      {%- if product.collections.first != blank -%}
+        <a href="{{ product.collections.first.url }}">{{ product.collections.first.title }}</a>
+        <span class="breadcrumb-sep" aria-hidden="true">/</span>
+      {%- endif -%}
+      <span aria-current="page">{{ product.title }}</span>
+    </nav>
+
+    <div class="product-layout">
+      <!-- Gallery -->
+      <div class="product-gallery">
+        <div class="product-gallery-main">
+          {%- if product.featured_image != blank -%}
+            <img
+              id="product-main-image"
+              src="{{ product.featured_image | image_url: width: 800 }}"
+              srcset="{{ product.featured_image | image_url: width: 600 }} 600w,
+                      {{ product.featured_image | image_url: width: 800 }} 800w,
+                      {{ product.featured_image | image_url: width: 1200 }} 1200w"
+              sizes="(max-width: 768px) 100vw, 50vw"
+              alt="{{ product.featured_image.alt | default: product.title | escape }}"
+              loading="eager"
+              width="800"
+              height="1000"
+            >
+          {%- else -%}
+            <div style="width:100%;height:100%;background:var(--bone);display:flex;align-items:center;justify-content:center;">
+              <svg width="80" height="80" viewBox="0 0 80 80" fill="none" aria-hidden="true">
+                <rect x="10" y="10" width="60" height="60" rx="4" stroke="#D2CBBC" stroke-width="2"/>
+                <circle cx="30" cy="30" r="8" stroke="#D2CBBC" stroke-width="2"/>
+                <path d="M10 55l20-15 15 12 10-8 15 16" stroke="#D2CBBC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+          {%- endif -%}
+        </div>
+
+        {%- if product.images.size > 1 -%}
+          <div class="product-gallery-thumbs">
+            {%- for image in product.images limit: 5 -%}
+              <div
+                class="product-gallery-thumb {% if forloop.first %}active{% endif %}"
+                data-src="{{ image | image_url: width: 800 }}"
+                role="button"
+                tabindex="0"
+                aria-label="View image {{ forloop.index }}"
+              >
+                <img
+                  src="{{ image | image_url: width: 150 }}"
+                  alt="{{ image.alt | default: product.title | escape }}"
+                  width="72"
+                  height="72"
+                  loading="lazy"
+                >
+              </div>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+
+      <!-- Product Info -->
+      <div class="product-info">
+        <!-- Eyebrow / Pillar -->
+        {%- if product.collections.first != blank -%}
+          <p class="eyebrow product-pillar-eyebrow">{{ product.collections.first.title }}</p>
+        {%- endif -%}
+
+        <!-- Title -->
+        <h1 class="product-title">{{ product.title }}</h1>
+
+        <!-- Star Rating (static 4.8) -->
+        <div class="product-rating">
+          <div class="stars" aria-label="Rating: 4.8 out of 5">
+            {%- for i in (1..5) -%}
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                <path d="M8 1.5l1.545 3.13 3.455.503-2.5 2.437.59 3.44L8 9.412l-3.09 1.598.59-3.44L3 5.133l3.455-.503L8 1.5z"/>
+              </svg>
+            {%- endfor -%}
+          </div>
+          <span class="rating-value">4.8</span>
+          <span class="rating-count">({{ section.settings.review_count | default: 124 }} reviews)</span>
+        </div>
+
+        <!-- Price -->
+        <div class="product-price-row">
+          {%- if product.compare_at_price > product.price -%}
+            <span class="price-current price-current--sale">{{ product.price | money }}</span>
+            <span class="price-compare">{{ product.compare_at_price | money }}</span>
+          {%- else -%}
+            <span class="price-current">{{ product.price | money }}</span>
+          {%- endif -%}
+        </div>
+
+        <!-- Stock -->
+        <div class="stock-indicator">
+          {%- if product.available -%}
+            {%- if product.variants.first.inventory_quantity > 0 and product.variants.first.inventory_quantity <= 10 -%}
+              <span class="stock-dot stock-dot--low" aria-hidden="true"></span>
+              <span class="stock-text">Only {{ product.variants.first.inventory_quantity }} left</span>
+            {%- else -%}
+              <span class="stock-dot" aria-hidden="true"></span>
+              <span class="stock-text stock-text--in">In stock</span>
+            {%- endif -%}
+          {%- else -%}
+            <span class="stock-dot stock-dot--out" aria-hidden="true"></span>
+            <span class="stock-text">Out of stock</span>
+          {%- endif -%}
+        </div>
+
+        <!-- Short Description -->
+        {%- if product.description != blank -%}
+          <div class="lede" style="border-top:1px solid var(--hairline);padding-top:20px;">
+            {{ product.description | truncatewords: 30 }}
+          </div>
+        {%- endif -%}
+
+        <!-- Add to Cart Form -->
+        {%- form 'product', product, data-atc-form: true -%}
+          <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+
+          <!-- Variants (if multiple) -->
+          {%- unless product.has_only_default_variant -%}
+            {%- for option in product.options_with_values -%}
+              <div class="quantity-row">
+                <label class="quantity-label" for="option-{{ option.position }}">{{ option.name }}</label>
+                <select id="option-{{ option.position }}" name="options[{{ option.name | escape }}]" style="padding:10px 14px;border:1px solid var(--hairline);border-radius:var(--radius-input);font-family:var(--font-sans);font-size:0.875rem;color:var(--ink);background:var(--paper);width:100%;">
+                  {%- for value in option.values -%}
+                    <option
+                      value="{{ value | escape }}"
+                      {% if option.selected_value == value %}selected{% endif %}
+                    >{{ value }}</option>
+                  {%- endfor -%}
+                </select>
+              </div>
+            {%- endfor -%}
+          {%- endunless -%}
+
+          <!-- Quantity -->
+          <div class="quantity-row">
+            <label class="quantity-label" for="quantity-input">Quantity</label>
+            <div class="quantity-selector">
+              <button type="button" class="quantity-btn quantity-minus" aria-label="Decrease quantity">&minus;</button>
+              <input
+                id="quantity-input"
+                class="quantity-input"
+                type="number"
+                name="quantity"
+                value="1"
+                min="1"
+                max="99"
+                aria-label="Quantity"
+              >
+              <button type="button" class="quantity-btn quantity-plus" aria-label="Increase quantity">+</button>
+            </div>
+          </div>
+
+          <!-- ATC Button -->
+          <button
+            type="submit"
+            class="atc-btn"
+            {%- unless product.available -%}disabled{%- endunless -%}
+          >
+            {%- if product.available -%}
+              Add to cart
+            {%- else -%}
+              Out of stock
+            {%- endif -%}
+          </button>
+        {%- endform -%}
+
+        <!-- Trust Badges -->
+        <div class="trust-badges">
+          <div class="trust-badge">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M3 8l2-3h14l2 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M1 8h22v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8z" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M9 12h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            <span class="trust-badge-label">Free shipping over $80</span>
+          </div>
+          <div class="trust-badge">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M3 12a9 9 0 1 0 18 0A9 9 0 0 0 3 12z" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M12 7v5l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            <span class="trust-badge-label">30-day returns</span>
+          </div>
+          <div class="trust-badge">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M12 2L4 6v6c0 5.25 3.5 10.14 8 11.5 4.5-1.36 8-6.25 8-11.5V6L12 2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+              <path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span class="trust-badge-label">Lifetime warranty</span>
+          </div>
+        </div>
+
+        <!-- Accordion: Specs -->
+        <div class="accordion">
+          <div class="accordion-item">
+            <button class="accordion-trigger" aria-expanded="false" aria-controls="accordion-specs">
+              Specifications
+              <svg class="accordion-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <div id="accordion-specs" class="accordion-content">
+              {%- if product.metafields.custom.specifications != blank -%}
+                {{ product.metafields.custom.specifications }}
+              {%- else -%}
+                <p>Detailed specifications available on request. Contact us at hello@krauno.com.</p>
+              {%- endif -%}
+            </div>
+          </div>
+          <div class="accordion-item">
+            <button class="accordion-trigger" aria-expanded="false" aria-controls="accordion-shipping">
+              Shipping &amp; Returns
+              <svg class="accordion-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <div id="accordion-shipping" class="accordion-content">
+              <p>Free shipping on orders over $80. Orders ship from Toronto within 2 business days. 30-day returns on all products, no questions asked.</p>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <button class="accordion-trigger" aria-expanded="false" aria-controls="accordion-warranty">
+              Warranty
+              <svg class="accordion-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <div id="accordion-warranty" class="accordion-content">
+              <p>Every KRAUNO product comes with a lifetime warranty against manufacturing defects. If it fails under normal use, we replace it.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Why We Carry It -->
+        <div class="pdp-editorial">
+          <p class="eyebrow">Why we carry it</p>
+          <h3 class="pdp-editorial-headline">{{ section.settings.editorial_headline | default: 'Tested before it earned a place here.' }}</h3>
+          <p class="pdp-editorial-body">
+            {%- if section.settings.editorial_body != blank -%}
+              {{ section.settings.editorial_body }}
+            {%- else -%}
+              {{ product.metafields.custom.editorial_note | default: 'This product passed our internal protocol. We used it daily, broke it in, and kept it because it held up. That's the bar for everything in this store.' }}
+            {%- endif -%}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Related Products -->
+<section class="related-products">
+  <div class="related-products-inner">
+    <div class="section-header">
+      <p class="eyebrow">You may also consider</p>
+      <h2>Related products.</h2>
+    </div>
+    <div class="product-grid">
+      {%- assign related_collection = product.collections.first -%}
+      {%- if related_collection != blank -%}
+        {%- for related_product in related_collection.products limit: 3 -%}
+          {%- unless related_product.id == product.id -%}
+            {%- render 'product-card', product: related_product -%}
+          {%- endunless -%}
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Main Product",
+  "settings": [
+    {
+      "type": "number",
+      "id": "review_count",
+      "label": "Review count (display)",
+      "default": 124
+    },
+    {
+      "type": "text",
+      "id": "editorial_headline",
+      "label": "Why we carry it — headline",
+      "default": "Tested before it earned a place here."
+    },
+    {
+      "type": "textarea",
+      "id": "editorial_body",
+      "label": "Why we carry it — body text"
+    }
+  ]
+}
+{% endschema %}

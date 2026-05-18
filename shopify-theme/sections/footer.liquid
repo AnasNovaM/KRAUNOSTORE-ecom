@@ -1,0 +1,89 @@
+<footer class="site-footer" role="contentinfo">
+  <div class="footer-inner">
+    <!-- Brand Column -->
+    <div class="footer-brand">
+      <a href="/" class="footer-logo" aria-label="{{ shop.name }} home">KRAUNO</a>
+      <p class="footer-tagline">{{ section.settings.tagline }}</p>
+      <form class="footer-email-form" action="/contact#contact_form" method="post" accept-charset="UTF-8">
+        <input type="hidden" name="form_type" value="customer">
+        <input type="hidden" name="utf8" value="✓">
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        <input
+          class="footer-email-input"
+          type="email"
+          name="contact[email]"
+          placeholder="{{ section.settings.email_placeholder }}"
+          aria-label="Email address"
+          required
+        >
+        <button class="footer-email-btn" type="submit">{{ section.settings.email_btn_label }}</button>
+      </form>
+    </div>
+
+    <!-- Links Grid -->
+    <div class="footer-links-grid">
+      <div class="footer-links-col">
+        <h4>Shop</h4>
+        <ul>
+          <li><a href="/collections/work">Work</a></li>
+          <li><a href="/collections/recover">Recover</a></li>
+          <li><a href="/collections/rest">Rest</a></li>
+          <li><a href="/collections/all">The Edit</a></li>
+        </ul>
+      </div>
+      <div class="footer-links-col">
+        <h4>About</h4>
+        <ul>
+          <li><a href="/pages/our-story">Our Story</a></li>
+          <li><a href="/pages/materials">Materials</a></li>
+          <li><a href="/pages/sustainability">Sustainability</a></li>
+          <li><a href="/blogs/journal">Journal</a></li>
+        </ul>
+      </div>
+      <div class="footer-links-col">
+        <h4>Support</h4>
+        <ul>
+          <li><a href="/pages/faq">FAQ</a></li>
+          <li><a href="/pages/shipping">Shipping</a></li>
+          <li><a href="/pages/returns">Returns</a></li>
+          <li><a href="/pages/contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer Bottom -->
+  <div class="footer-bottom">
+    <p>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. All rights reserved.</p>
+    <p>
+      <a href="/policies/privacy-policy">Privacy</a>&nbsp;&nbsp;
+      <a href="/policies/terms-of-service">Terms</a>
+    </p>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "Brand tagline",
+      "default": "Ergonomics for the way you actually live."
+    },
+    {
+      "type": "text",
+      "id": "email_placeholder",
+      "label": "Email input placeholder",
+      "default": "Your email"
+    },
+    {
+      "type": "text",
+      "id": "email_btn_label",
+      "label": "Email button label",
+      "default": "Subscribe"
+    }
+  ]
+}
+{% endschema %}

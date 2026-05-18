@@ -1,0 +1,24 @@
+{
+  "current": {
+    "color_paper": "#F4EFE6",
+    "color_ink": "#1A1814",
+    "color_ink_2": "#3A362F",
+    "color_ink_3": "#6E665A",
+    "color_bone": "#FBF8F2",
+    "color_hairline": "#D2CBBC",
+    "color_clay": "#B8674A",
+    "color_clay_deep": "#944E36",
+    "color_clay_soft": "#E8C9B8",
+    "color_sage": "#6E7B68",
+    "color_pillar_work": "#DED7C8",
+    "color_pillar_recover": "#C8D0BF",
+    "color_pillar_rest": "#B8B5AB",
+    "font_display": "'Instrument Serif', Georgia, serif",
+    "font_body": "'Geist', system-ui, sans-serif",
+    "font_mono": "'Geist Mono', monospace",
+    "store_name": "KRAUNO",
+    "store_tagline": "Ergonomics for the way you actually live.",
+    "social_instagram": "",
+    "social_twitter": ""
+  }
+}

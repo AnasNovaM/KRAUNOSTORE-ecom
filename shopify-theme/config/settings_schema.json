@@ -1,0 +1,176 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "KRAUNO",
+    "theme_version": "1.0.0",
+    "theme_author": "KRAUNO",
+    "theme_documentation_url": "https://krauno.com",
+    "theme_support_url": "https://krauno.com/pages/contact"
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Brand Colors"
+      },
+      {
+        "type": "color",
+        "id": "color_paper",
+        "label": "Paper (background)",
+        "default": "#F4EFE6"
+      },
+      {
+        "type": "color",
+        "id": "color_ink",
+        "label": "Ink (primary text)",
+        "default": "#1A1814"
+      },
+      {
+        "type": "color",
+        "id": "color_ink_2",
+        "label": "Ink 2 (secondary text)",
+        "default": "#3A362F"
+      },
+      {
+        "type": "color",
+        "id": "color_ink_3",
+        "label": "Ink 3 (meta/captions)",
+        "default": "#6E665A"
+      },
+      {
+        "type": "color",
+        "id": "color_bone",
+        "label": "Bone (card surfaces)",
+        "default": "#FBF8F2"
+      },
+      {
+        "type": "color",
+        "id": "color_hairline",
+        "label": "Hairline (borders)",
+        "default": "#D2CBBC"
+      },
+      {
+        "type": "header",
+        "content": "Accent Colors"
+      },
+      {
+        "type": "color",
+        "id": "color_clay",
+        "label": "Clay (primary CTA)",
+        "default": "#B8674A"
+      },
+      {
+        "type": "color",
+        "id": "color_clay_deep",
+        "label": "Clay Deep (hover)",
+        "default": "#944E36"
+      },
+      {
+        "type": "color",
+        "id": "color_clay_soft",
+        "label": "Clay Soft (badges)",
+        "default": "#E8C9B8"
+      },
+      {
+        "type": "color",
+        "id": "color_sage",
+        "label": "Sage (secondary accent)",
+        "default": "#6E7B68"
+      },
+      {
+        "type": "header",
+        "content": "Pillar Colors"
+      },
+      {
+        "type": "color",
+        "id": "color_pillar_work",
+        "label": "Work pillar",
+        "default": "#DED7C8"
+      },
+      {
+        "type": "color",
+        "id": "color_pillar_recover",
+        "label": "Recover pillar",
+        "default": "#C8D0BF"
+      },
+      {
+        "type": "color",
+        "id": "color_pillar_rest",
+        "label": "Rest pillar",
+        "default": "#B8B5AB"
+      }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Font Families"
+      },
+      {
+        "type": "select",
+        "id": "font_display",
+        "label": "Display / Headlines",
+        "options": [
+          { "value": "'Instrument Serif', Georgia, serif", "label": "Instrument Serif" },
+          { "value": "Georgia, serif", "label": "Georgia" }
+        ],
+        "default": "'Instrument Serif', Georgia, serif"
+      },
+      {
+        "type": "select",
+        "id": "font_body",
+        "label": "Body",
+        "options": [
+          { "value": "'Geist', system-ui, sans-serif", "label": "Geist" },
+          { "value": "system-ui, sans-serif", "label": "System UI" }
+        ],
+        "default": "'Geist', system-ui, sans-serif"
+      },
+      {
+        "type": "select",
+        "id": "font_mono",
+        "label": "Mono (prices, SKUs)",
+        "options": [
+          { "value": "'Geist Mono', monospace", "label": "Geist Mono" },
+          { "value": "monospace", "label": "System Mono" }
+        ],
+        "default": "'Geist Mono', monospace"
+      }
+    ]
+  },
+  {
+    "name": "Store information",
+    "settings": [
+      {
+        "type": "text",
+        "id": "store_name",
+        "label": "Store name",
+        "default": "KRAUNO"
+      },
+      {
+        "type": "textarea",
+        "id": "store_tagline",
+        "label": "Brand tagline",
+        "default": "Ergonomics for the way you actually live."
+      }
+    ]
+  },
+  {
+    "name": "Social media",
+    "settings": [
+      {
+        "type": "url",
+        "id": "social_instagram",
+        "label": "Instagram URL"
+      },
+      {
+        "type": "url",
+        "id": "social_twitter",
+        "label": "Twitter / X URL"
+      }
+    ]
+  }
+]

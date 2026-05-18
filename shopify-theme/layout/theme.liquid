@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#F4EFE6">
+
+    <title>
+      {%- if page_title == blank -%}
+        {{ shop.name }}
+      {%- else -%}
+        {{ page_title }} &mdash; {{ shop.name }}
+      {%- endif -%}
+    </title>
+
+    {%- if page_description -%}
+      <meta name="description" content="{{ page_description | escape }}">
+    {%- endif -%}
+
+    {%- if canonical_url != blank -%}
+      <link rel="canonical" href="{{ canonical_url }}">
+    {%- endif -%}
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- KRAUNO CSS -->
+    {{ 'krauno.css' | asset_url | stylesheet_tag }}
+
+    {{ content_for_header }}
+  </head>
+
+  <body>
+    <!-- Skip to content -->
+    <a href="#main-content" class="visually-hidden">Skip to content</a>
+
+    <!-- Announcement Bar -->
+    {%- sections 'announcement-bar' -%}
+
+    <!-- Site Header -->
+    {%- sections 'header' -%}
+
+    <!-- Mobile Nav -->
+    <nav class="mobile-nav" aria-label="Mobile navigation" role="navigation">
+      <a href="/collections/work">Work</a>
+      <a href="/collections/recover">Recover</a>
+      <a href="/collections/rest">Rest</a>
+      <a href="/collections/all">The Edit</a>
+    </nav>
+
+    <!-- Main Content -->
+    <main id="main-content" role="main">
+      {{ content_for_layout }}
+    </main>
+
+    <!-- Footer -->
+    {%- sections 'footer' -%}
+
+    <!-- KRAUNO JS -->
+    <script src="{{ 'krauno.js' | asset_url }}" defer></script>
+  </body>
+</html>

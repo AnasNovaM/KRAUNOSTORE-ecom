@@ -1,0 +1,54 @@
+<div class="customer-page">
+  <h1>Sign in</h1>
+
+  {%- form 'customer_login' -%}
+    {{ form.errors | default_errors }}
+
+    <div class="customer-form">
+      <div class="form-group">
+        <label class="form-label" for="customer-email">Email</label>
+        <input
+          class="form-input"
+          type="email"
+          name="customer[email]"
+          id="customer-email"
+          autocomplete="email"
+          autocorrect="off"
+          autocapitalize="off"
+          placeholder="you@example.com"
+          required
+        >
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="customer-password">Password</label>
+        <input
+          class="form-input"
+          type="password"
+          name="customer[password]"
+          id="customer-password"
+          autocomplete="current-password"
+          placeholder="Your password"
+          required
+        >
+      </div>
+
+      <button type="submit" class="btn btn-primary btn--full">Sign in</button>
+
+      <p class="small" style="text-align:center;">
+        <a href="/account/forgot_password">Forgot your password?</a>
+      </p>
+
+      <p class="small" style="text-align:center;margin-top:16px;">
+        New customer? <a href="/account/register">Create account</a>
+      </p>
+    </div>
+  {%- endform -%}
+</div>
+
+{% schema %}
+{
+  "name": "Customer Login",
+  "settings": []
+}
+{% endschema %}

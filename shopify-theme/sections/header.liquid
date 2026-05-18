@@ -1,0 +1,70 @@
+<header class="site-header" role="banner">
+  <div class="header-inner">
+    <!-- Logo -->
+    <a href="/" class="header-logo" aria-label="{{ shop.name }} home">
+      {{ section.settings.logo_text | default: 'KRAUNO' }}
+    </a>
+
+    <!-- Primary Nav -->
+    <nav class="header-nav" aria-label="Primary navigation">
+      <ul>
+        <li><a href="/collections/work">Work</a></li>
+        <li><a href="/collections/recover">Recover</a></li>
+        <li><a href="/collections/rest">Rest</a></li>
+        <li><a href="/collections/all">The Edit</a></li>
+      </ul>
+    </nav>
+
+    <!-- Header Actions -->
+    <div class="header-actions">
+      <!-- Search -->
+      <a href="/search" class="header-icon" aria-label="Search">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <circle cx="8.5" cy="8.5" r="5.5" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M13 13L17 17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </a>
+
+      <!-- Account -->
+      <a href="/account" class="header-icon" aria-label="Account">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <circle cx="10" cy="7" r="3.5" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M3 17c0-3.314 3.134-6 7-6s7 2.686 7 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </a>
+
+      <!-- Cart -->
+      <a href="/cart" class="header-icon" aria-label="Cart">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <path d="M2 2h2l2.4 8h8.4l1.6-5.6H6.8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="9" cy="16.5" r="1" fill="currentColor"/>
+          <circle cx="14" cy="16.5" r="1" fill="currentColor"/>
+        </svg>
+        <span class="cart-count" data-count="{{ cart.item_count }}" {% if cart.item_count == 0 %}style="display:none"{% endif %}>
+          {{ cart.item_count }}
+        </span>
+      </a>
+
+      <!-- Mobile Menu Toggle -->
+      <button class="mobile-menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "text",
+      "id": "logo_text",
+      "label": "Logo wordmark",
+      "default": "KRAUNO"
+    }
+  ]
+}
+{% endschema %}

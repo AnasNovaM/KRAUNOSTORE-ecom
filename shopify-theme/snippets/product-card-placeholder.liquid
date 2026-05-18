@@ -1,0 +1,21 @@
+{% comment %}
+  Placeholder product card for when no collection is selected.
+  Usage: {% render 'product-card-placeholder', index: i %}
+{% endcomment %}
+
+{%- assign placeholder_names = 'Lumbar Pillow,Seat Cushion,Massage Gun,Sleep Mask,Heating Pad,White Noise Machine' | split: ',' -%}
+{%- assign placeholder_prices = '$89,$119,$219,$34,$79,$89' | split: ',' -%}
+{%- assign placeholder_blurbs = 'Holds the curve of your lower back.,Distributes pressure evenly.,Six speeds. Four heads.,Zero light leak.,Weighted. Microplush.,Twenty-six sounds.' | split: ',' -%}
+{%- assign idx = index | minus: 1 -%}
+{%- assign bg_colors = 'var(--pillar-work),var(--pillar-recover),var(--pillar-rest),var(--pillar-rest),var(--pillar-recover),var(--pillar-rest)' | split: ',' -%}
+
+<div class="product-card" style="cursor:default;">
+  <div class="product-card-image" style="background:{{ bg_colors[idx] }};"></div>
+  <div class="product-card-body">
+    <h3 class="product-card-title">{{ placeholder_names[idx] }}</h3>
+    <p class="product-card-blurb">{{ placeholder_blurbs[idx] }}</p>
+    <div class="product-card-price">
+      <span class="price">{{ placeholder_prices[idx] }}</span>
+    </div>
+  </div>
+</div>

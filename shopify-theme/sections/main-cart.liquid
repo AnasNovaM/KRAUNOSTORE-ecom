@@ -1,0 +1,126 @@
+<section class="main-cart" aria-label="Shopping cart">
+  <div class="main-cart-inner">
+    <div class="cart-header">
+      <h1>Your cart</h1>
+    </div>
+
+    {%- if cart.item_count > 0 -%}
+      {%- form 'cart', cart, data-cart-form: true -%}
+        <div class="cart-layout">
+          <!-- Cart Items -->
+          <div class="cart-items" aria-label="Cart items">
+            {%- for item in cart.items -%}
+              <div class="cart-item">
+                <!-- Image -->
+                <div class="cart-item-image">
+                  {%- if item.image != blank -%}
+                    <img
+                      src="{{ item.image | image_url: width: 200 }}"
+                      alt="{{ item.image.alt | default: item.product.title | escape }}"
+                      width="88"
+                      height="88"
+                      loading="lazy"
+                    >
+                  {%- else -%}
+                    <div style="width:100%;height:100%;background:var(--pillar-work);"></div>
+                  {%- endif -%}
+                </div>
+
+                <!-- Details -->
+                <div class="cart-item-details">
+                  <a href="{{ item.url }}" class="cart-item-title">{{ item.product.title }}</a>
+                  {%- unless item.variant.title == 'Default Title' -%}
+                    <p class="cart-item-variant">{{ item.variant.title }}</p>
+                  {%- endunless -%}
+
+                  <div class="cart-item-row">
+                    <!-- Quantity -->
+                    <div class="cart-item-qty quantity-selector">
+                      <button type="button" class="quantity-btn quantity-minus" aria-label="Decrease quantity">&minus;</button>
+                      <input
+                        class="quantity-input"
+                        type="number"
+                        name="updates[]"
+                        value="{{ item.quantity }}"
+                        min="0"
+                        max="99"
+                        data-line="{{ forloop.index }}"
+                        aria-label="Quantity for {{ item.product.title | escape }}"
+                      >
+                      <button type="button" class="quantity-btn quantity-plus" aria-label="Increase quantity">+</button>
+                    </div>
+
+                    <!-- Price -->
+                    <span class="cart-item-price">{{ item.final_line_price | money }}</span>
+                  </div>
+
+                  <!-- Remove -->
+                  <button
+                    type="button"
+                    class="cart-item-remove"
+                    onclick="fetch('/cart/change.js',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({line:{{ forloop.index }},quantity:0})}).then(()=>location.reload())"
+                    aria-label="Remove {{ item.product.title | escape }}"
+                  >
+                    Remove
+                  </button>
+                </div>
+              </div>
+            {%- endfor -%}
+          </div>
+
+          <!-- Cart Summary -->
+          <div class="cart-summary" aria-label="Order summary">
+            <p class="cart-summary-title">Order summary</p>
+
+            <div class="cart-summary-line">
+              <span>Subtotal</span>
+              <span class="mono" data-cart-subtotal>{{ cart.total_price | money }}</span>
+            </div>
+
+            {%- if cart.total_discounts > 0 -%}
+              <div class="cart-summary-line" style="color:var(--clay);">
+                <span>Discount</span>
+                <span class="mono">&minus;{{ cart.total_discounts | money }}</span>
+              </div>
+            {%- endif -%}
+
+            <div class="cart-summary-line" style="font-size:0.8125rem;color:var(--ink-3);">
+              <span>Shipping</span>
+              <span>Calculated at checkout</span>
+            </div>
+
+            <div class="cart-summary-line cart-summary-line--total">
+              <span>Total</span>
+              <span class="mono">{{ cart.total_price | money }}</span>
+            </div>
+
+            <!-- Checkout -->
+            <a href="/checkout" class="cart-checkout-btn">
+              Proceed to checkout
+            </a>
+
+            <p class="cart-note">Free shipping on orders over $80</p>
+          </div>
+        </div>
+      {%- endform -%}
+    {%- else -%}
+      <div class="cart-empty">
+        <svg width="64" height="64" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+          <circle cx="32" cy="32" r="30" stroke="#D2CBBC" stroke-width="2"/>
+          <path d="M20 28l4-8h16l4 8" stroke="#D2CBBC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M16 28h32v12a4 4 0 0 1-4 4H20a4 4 0 0 1-4-4V28z" stroke="#D2CBBC" stroke-width="2"/>
+        </svg>
+        <h2>Your cart is empty.</h2>
+        <p class="lede" style="color:var(--ink-3);max-width:320px;">Nothing here yet. Browse the edit and add something worth keeping.</p>
+        <a href="/collections/all" class="btn btn-primary">Shop the edit</a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Cart",
+  "settings": []
+}
+{% endschema %}

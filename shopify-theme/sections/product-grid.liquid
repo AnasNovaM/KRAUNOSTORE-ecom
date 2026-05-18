@@ -1,0 +1,112 @@
+<section class="collection-layout" aria-label="Products">
+  <div class="collection-layout-inner">
+    <!-- Toolbar -->
+    <div class="collection-toolbar">
+      <p class="product-count">
+        {%- if collection != blank -%}
+          {{ collection.products_count }}
+          {%- if collection.products_count == 1 -%}
+            product
+          {%- else -%}
+            products
+          {%- endif -%}
+        {%- endif -%}
+      </p>
+      <div class="sort-select-wrap">
+        <label for="sort-select" class="sort-label">Sort by</label>
+        <select id="sort-select" class="sort-select" name="sort_by" onchange="window.location.href = '?sort_by=' + this.value">
+          <option value="manual" {% if collection.sort_by == 'manual' %}selected{% endif %}>Featured</option>
+          <option value="price-ascending" {% if collection.sort_by == 'price-ascending' %}selected{% endif %}>Price: low to high</option>
+          <option value="price-descending" {% if collection.sort_by == 'price-descending' %}selected{% endif %}>Price: high to low</option>
+          <option value="title-ascending" {% if collection.sort_by == 'title-ascending' %}selected{% endif %}>Alphabetical</option>
+          <option value="created-descending" {% if collection.sort_by == 'created-descending' %}selected{% endif %}>Newest</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Layout with optional sidebar -->
+    <div class="collection-with-sidebar">
+      <!-- Filter Sidebar (desktop) -->
+      <aside class="filter-sidebar" aria-label="Product filters">
+        <h3>Filter</h3>
+        {%- for filter in collection.filters -%}
+          <div class="filter-group">
+            <div class="filter-group-title" role="button" tabindex="0">
+              {{ filter.label }}
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" class="accordion-icon">
+                <path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="filter-options">
+              {%- for value in filter.values -%}
+                <label class="filter-option">
+                  <input
+                    type="checkbox"
+                    name="{{ filter.param_name }}"
+                    value="{{ value.value }}"
+                    {% if value.active %}checked{% endif %}
+                    onchange="this.form.submit()"
+                  >
+                  {{ value.label }}
+                  <span class="text-ink-3">({{ value.count }})</span>
+                </label>
+              {%- endfor -%}
+            </div>
+          </div>
+        {%- else -%}
+          <!-- No filters configured -->
+          <div class="filter-group">
+            <div class="filter-group-title">Pillar</div>
+            <div class="filter-options">
+              <label class="filter-option">
+                <a href="/collections/work">Work</a>
+              </label>
+              <label class="filter-option">
+                <a href="/collections/recover">Recover</a>
+              </label>
+              <label class="filter-option">
+                <a href="/collections/rest">Rest</a>
+              </label>
+            </div>
+          </div>
+        {%- endfor -%}
+      </aside>
+
+      <!-- Product Grid -->
+      <div>
+        <div class="product-grid">
+          {%- if collection != blank and collection.products.size > 0 -%}
+            {%- for product in collection.products -%}
+              {%- render 'product-card', product: product -%}
+            {%- endfor -%}
+          {%- elsif collection != blank and collection.products.size == 0 -%}
+            <p class="lede" style="grid-column:1/-1; color: var(--ink-3);">No products found in this collection.</p>
+          {%- else -%}
+            {%- for i in (1..6) -%}
+              {%- render 'product-card-placeholder', index: i -%}
+            {%- endfor -%}
+          {%- endif -%}
+        </div>
+
+        <!-- Pagination -->
+        {%- if paginate.pages > 1 -%}
+          <div style="display:flex; justify-content:center; gap:8px; margin-top:48px;">
+            {%- if paginate.previous -%}
+              <a href="{{ paginate.previous.url }}" class="btn btn-ghost" style="padding:10px 20px;">Previous</a>
+            {%- endif -%}
+            {%- if paginate.next -%}
+              <a href="{{ paginate.next.url }}" class="btn btn-ghost" style="padding:10px 20px;">Next</a>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product Grid",
+  "settings": []
+}
+{% endschema %}

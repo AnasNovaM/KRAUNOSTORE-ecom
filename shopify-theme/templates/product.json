@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "main-product": {
+      "type": "main-product",
+      "settings": {
+        "review_count": 124
+      }
+    }
+  },
+  "order": ["main-product"]
+}

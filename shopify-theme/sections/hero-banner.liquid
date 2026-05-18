@@ -1,0 +1,150 @@
+<section class="hero-banner" aria-label="Hero">
+  <div class="hero-inner">
+    <!-- Left: Content -->
+    <div class="hero-content">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+
+      <h1 class="hero-headline">
+        {%- if section.settings.headline_prefix != blank -%}
+          {{ section.settings.headline_prefix }}
+        {%- endif -%}
+        {%- if section.settings.headline_italic != blank -%}
+          <em>{{ section.settings.headline_italic }}</em>
+        {%- endif -%}
+        {%- if section.settings.headline_suffix != blank -%}
+          {{ section.settings.headline_suffix }}
+        {%- endif -%}
+      </h1>
+
+      {%- if section.settings.subheading != blank -%}
+        <p class="lede hero-lede">{{ section.settings.subheading }}</p>
+      {%- endif -%}
+
+      <div class="hero-actions">
+        {%- if section.settings.btn_primary_label != blank -%}
+          <a href="{{ section.settings.btn_primary_url }}" class="btn btn-primary">
+            {{ section.settings.btn_primary_label }}
+          </a>
+        {%- endif -%}
+        {%- if section.settings.btn_ghost_label != blank -%}
+          <a href="{{ section.settings.btn_ghost_url }}" class="btn btn-ghost">
+            {{ section.settings.btn_ghost_label }}
+          </a>
+        {%- endif -%}
+      </div>
+    </div>
+
+    <!-- Right: Image -->
+    <div class="hero-image-wrap">
+      {%- if section.settings.image != blank -%}
+        <img
+          src="{{ section.settings.image | image_url: width: 900 }}"
+          srcset="{{ section.settings.image | image_url: width: 600 }} 600w,
+                  {{ section.settings.image | image_url: width: 900 }} 900w,
+                  {{ section.settings.image | image_url: width: 1200 }} 1200w"
+          sizes="(max-width: 768px) 100vw, 50vw"
+          alt="{{ section.settings.image.alt | default: 'KRAUNO hero image' | escape }}"
+          loading="eager"
+          width="900"
+          height="1125"
+        >
+      {%- else -%}
+        <div class="hero-placeholder">
+          <svg width="240" height="240" viewBox="0 0 240 240" fill="none" aria-hidden="true">
+            <!-- Desk scene placeholder -->
+            <rect x="20" y="160" width="200" height="4" rx="2" fill="#D2CBBC"/>
+            <!-- Monitor -->
+            <rect x="80" y="80" width="80" height="54" rx="4" fill="#3A362F" opacity="0.15"/>
+            <rect x="110" y="134" width="20" height="10" rx="2" fill="#3A362F" opacity="0.1"/>
+            <rect x="95" y="144" width="50" height="3" rx="1.5" fill="#3A362F" opacity="0.08"/>
+            <!-- Monitor arm -->
+            <line x1="120" y1="134" x2="120" y2="160" stroke="#D2CBBC" stroke-width="3" stroke-linecap="round"/>
+            <!-- Keyboard -->
+            <rect x="70" y="162" width="100" height="18" rx="3" fill="#3A362F" opacity="0.08"/>
+            <!-- Mouse -->
+            <rect x="185" y="163" width="20" height="14" rx="7" fill="#3A362F" opacity="0.1"/>
+            <!-- Chair back suggestion -->
+            <rect x="40" y="100" width="30" height="60" rx="6" fill="#3A362F" opacity="0.06"/>
+            <!-- Lamp -->
+            <line x1="200" y1="160" x2="200" y2="110" stroke="#D2CBBC" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M192 110 Q200 100 208 110" stroke="#D2CBBC" stroke-width="2" fill="none"/>
+          </svg>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero Banner",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow label",
+      "default": "Work. Recover. Rest."
+    },
+    {
+      "type": "text",
+      "id": "headline_prefix",
+      "label": "Headline — text before italic",
+      "default": "Your body works hard."
+    },
+    {
+      "type": "text",
+      "id": "headline_italic",
+      "label": "Headline — italic word",
+      "default": "Equip it"
+    },
+    {
+      "type": "text",
+      "id": "headline_suffix",
+      "label": "Headline — text after italic",
+      "default": "accordingly."
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading / lede",
+      "default": "Ergonomic tools designed for the desk, the mat, and the pillow. Three pillars. One coherent practice."
+    },
+    {
+      "type": "text",
+      "id": "btn_primary_label",
+      "label": "Primary button label",
+      "default": "Shop the edit"
+    },
+    {
+      "type": "url",
+      "id": "btn_primary_url",
+      "label": "Primary button link",
+      "default": "/collections/all"
+    },
+    {
+      "type": "text",
+      "id": "btn_ghost_label",
+      "label": "Ghost button label",
+      "default": "Our approach"
+    },
+    {
+      "type": "url",
+      "id": "btn_ghost_url",
+      "label": "Ghost button link",
+      "default": "/pages/our-story"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Hero image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero Banner"
+    }
+  ]
+}
+{% endschema %}

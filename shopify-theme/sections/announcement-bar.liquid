@@ -1,0 +1,22 @@
+<div class="announcement-bar" role="complementary" aria-label="Announcement">
+  <p>{{ section.settings.announcement_text }}</p>
+</div>
+
+{% schema %}
+{
+  "name": "Announcement Bar",
+  "settings": [
+    {
+      "type": "text",
+      "id": "announcement_text",
+      "label": "Announcement text",
+      "default": "Free shipping on orders over $80. 30-day returns. Ships from Toronto."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Announcement Bar"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,13 @@
+{
+  "sections": {
+    "collection-hero": {
+      "type": "collection-hero",
+      "settings": {}
+    },
+    "product-grid": {
+      "type": "product-grid",
+      "settings": {}
+    }
+  },
+  "order": ["collection-hero", "product-grid"]
+}

@@ -1,0 +1,76 @@
+<section class="editorial-quote" aria-label="Editorial">
+  <div class="editorial-quote-inner">
+    {%- if section.settings.eyebrow != blank -%}
+      <p class="eyebrow eyebrow--clay">{{ section.settings.eyebrow }}</p>
+    {%- endif -%}
+
+    <blockquote>
+      {%- if section.settings.quote_prefix != blank -%}
+        {{ section.settings.quote_prefix }}
+      {%- endif -%}
+      {%- if section.settings.quote_italic != blank -%}
+        <em>{{ section.settings.quote_italic }}</em>
+      {%- endif -%}
+      {%- if section.settings.quote_suffix != blank -%}
+        {{ section.settings.quote_suffix }}
+      {%- endif -%}
+    </blockquote>
+
+    {%- if section.settings.body != blank -%}
+      <p class="editorial-quote-body">{{ section.settings.body }}</p>
+    {%- endif -%}
+
+    {%- if section.settings.attribution != blank -%}
+      <p class="editorial-quote-attr">&mdash; {{ section.settings.attribution }}</p>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Editorial Quote",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow label",
+      "default": "The KRAUNO standard"
+    },
+    {
+      "type": "text",
+      "id": "quote_prefix",
+      "label": "Quote — text before italic",
+      "default": "We test everything. We carry"
+    },
+    {
+      "type": "text",
+      "id": "quote_italic",
+      "label": "Quote — italic word or phrase",
+      "default": "only what stays."
+    },
+    {
+      "type": "text",
+      "id": "quote_suffix",
+      "label": "Quote — text after italic",
+      "default": ""
+    },
+    {
+      "type": "textarea",
+      "id": "body",
+      "label": "Supporting paragraph",
+      "default": "Every product in this store has passed an internal testing protocol. If we can't use it daily, it doesn't make the edit. That's the whole process."
+    },
+    {
+      "type": "text",
+      "id": "attribution",
+      "label": "Attribution",
+      "default": "KRAUNO, Toronto"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Editorial Quote"
+    }
+  ]
+}
+{% endschema %}
