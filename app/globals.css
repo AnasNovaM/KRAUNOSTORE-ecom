@@ -1,0 +1,155 @@
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap');
+
+:root {
+  --paper:         #F4EFE6;
+  --paper-2:       #EBE5D9;
+  --paper-3:       #DED7C8;
+  --bone:          #FBF8F2;
+  --ink:           #1A1814;
+  --ink-2:         #3A362F;
+  --ink-3:         #6E665A;
+  --stone:         #8A857C;
+  --hairline:      #D2CBBC;
+
+  --clay:          #B8674A;
+  --clay-deep:     #944E36;
+  --clay-soft:     #E8C9B8;
+
+  --sage:          #6E7B68;
+  --sage-deep:     #4E5A48;
+  --sage-soft:     #C8D0BF;
+
+  --success:       #5C7355;
+  --warning:       #B8894A;
+  --danger:        #A04438;
+
+  --pillar-work:    #DED7C8;
+  --pillar-recover: #C8D0BF;
+  --pillar-rest:    #B8B5AB;
+
+  --font-display:  'Instrument Serif', 'Newsreader', Georgia, serif;
+  --font-body:     'Geist', 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono:     'Geist Mono', 'IBM Plex Mono', ui-monospace, monospace;
+
+  --t-12:  0.75rem;
+  --t-13:  0.8125rem;
+  --t-14:  0.875rem;
+  --t-16:  1rem;
+  --t-18:  1.125rem;
+  --t-22:  1.375rem;
+  --t-28:  1.75rem;
+  --t-36:  2.25rem;
+  --t-48:  3rem;
+  --t-72:  4.5rem;
+  --t-120: 7.5rem;
+
+  --w-light:   300;
+  --w-regular: 400;
+  --w-medium:  500;
+  --w-semi:    600;
+
+  --lh-tight: 1.02;
+  --lh-snug:  1.12;
+  --lh-base:  1.5;
+  --lh-loose: 1.65;
+
+  --ls-display: -0.02em;
+  --ls-tight:   -0.01em;
+  --ls-normal:  0;
+  --ls-wide:    0.04em;
+  --ls-caps:    0.14em;
+
+  --s-1:   4px;
+  --s-2:   8px;
+  --s-3:  12px;
+  --s-4:  16px;
+  --s-5:  24px;
+  --s-6:  32px;
+  --s-7:  48px;
+  --s-8:  64px;
+  --s-9:  96px;
+  --s-10: 128px;
+  --s-11: 192px;
+
+  --r-0:    0;
+  --r-1:    2px;
+  --r-2:    4px;
+  --r-3:    8px;
+  --r-full: 999px;
+
+  --border-hair: 1px solid var(--hairline);
+  --border-ink:  1px solid var(--ink);
+  --border-soft: 1px solid var(--paper-3);
+
+  --shadow-0: none;
+  --shadow-1: 0 1px 0 0 rgba(26, 24, 20, 0.04);
+  --shadow-2: 0 4px 20px -8px rgba(26, 24, 20, 0.08);
+  --shadow-3: 0 16px 48px -24px rgba(26, 24, 20, 0.14);
+
+  --ease:     cubic-bezier(0.2, 0, 0, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-fast: 120ms;
+  --dur-base: 200ms;
+  --dur-slow: 320ms;
+
+  --container:        1280px;
+  --container-narrow: 880px;
+  --gutter:           var(--s-6);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: var(--t-16);
+  font-weight: var(--w-regular);
+  line-height: var(--lh-base);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+a {
+  color: var(--ink);
+  text-decoration: none;
+}
+
+button {
+  font-family: var(--font-body);
+  cursor: pointer;
+}
+
+::selection {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.eyebrow {
+  font-family: var(--font-body);
+  font-size: var(--t-12);
+  font-weight: var(--w-medium);
+  letter-spacing: var(--ls-caps);
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideIn {
+  from { transform: translateX(40px); opacity: 0; }
+  to   { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes fadeOverlay {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
